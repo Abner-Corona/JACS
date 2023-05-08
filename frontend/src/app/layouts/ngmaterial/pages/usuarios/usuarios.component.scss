@@ -1,0 +1,7 @@
+table {
+    width: 100%;
+  }
+  .wrapper{height: 100px;position:relative;}
+  .right,.left{width:50%; position:absolute;}
+  .right{right:0;text-align: right;}
+  .left{left:0;}

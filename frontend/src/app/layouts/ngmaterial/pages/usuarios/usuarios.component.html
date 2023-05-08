@@ -1,0 +1,114 @@
+<div style="margin-bottom: 10px">
+  <div class="wrapper">
+    <div class="left">
+      <button (click)="openDialogSave(true)" mat-raised-button>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div class="right">
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" [(ngModel)]="buscador" />
+      </mat-form-field>
+      <button (click)="search()" mat-raised-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+  <table mat-table [dataSource]="listData" class="mat-elevation-z8">
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="direccion">
+      <th mat-header-cell *matHeaderCellDef>Dirección</th>
+      <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef>Telefono</th>
+      <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef>Options</th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <mat-icon
+          (click)="openDelete(element, i)"
+          style="color: darkred; cursor: pointer; font-size: 15px; height: 13px"
+        >
+          delete_outline
+        </mat-icon>
+        <mat-icon
+          (click)="openDialogSave(true, element, i)"
+          style="
+            color: darkblue;
+            cursor: pointer;
+            font-size: 15px;
+            height: 13px;
+          "
+        >
+          edit
+        </mat-icon>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<ng-template #addDialog>
+  <form [formGroup]="validateForm">
+    <mat-form-field style="width: 100%" appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input
+        name="nombre"
+        formControlName="nombre"
+        matInput
+        [(ngModel)]="currentItem.nombre"
+      /><mat-error>Campo invalido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%" appearance="fill">
+      <mat-label>Direccion</mat-label>
+      <input
+        name="direccion"
+        formControlName="direccion"
+        matInput
+        [(ngModel)]="currentItem.direccion"
+      /><mat-error>Campo invalido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        email
+        name="email"
+        formControlName="email"
+        matInput
+        [(ngModel)]="currentItem.email"
+      /><mat-error>Campo invalido</mat-error>
+    </mat-form-field>
+    <mat-form-field style="width: 100%" appearance="fill">
+      <mat-label>Telefono</mat-label>
+      <input
+        type="number"
+        name="telefono"
+        formControlName="telefono"
+        matInput
+        [(ngModel)]="currentItem.telefono"
+      /><mat-error>Campo invalido</mat-error>
+    </mat-form-field>
+  </form>
+
+  <div style="text-align: right">
+    <button (click)="openDialogSave(false)" mat-stroked-button>Cancel</button>
+    <button (click)="saveDialog()" mat-stroked-button>Save</button>
+  </div>
+</ng-template>

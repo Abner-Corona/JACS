@@ -1,0 +1,25 @@
+<mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
+    <mat-drawer #drawer class="drawer" mode="side" opened="true">
+        <div class="contents">
+            <mat-list>
+               
+                <mat-list-item class="text-white" routerLinkActive="active" routerLink="/ngmaterial/usuarios">
+                    <mat-icon style="position: relative;
+                    top: 5px;">perm_identity</mat-icon>
+                    Usuarios
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <mat-toolbar class="main header">
+            <mat-icon (click)="drawer.opened ? drawer.close() : drawer.toggle()">
+                menu
+            </mat-icon>
+        </mat-toolbar>
+        <div class="main contents">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
